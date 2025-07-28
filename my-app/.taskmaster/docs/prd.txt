@@ -1,0 +1,344 @@
+# 📝 PRD: **Memora** – AI 음성 메모장 웹서비스
+
+---
+
+## 1. Overview
+
+**Memora**는 AI 기반 웹 메모 애플리케이션으로, 사용자의 음성 또는 텍스트 입력을 받아 **AI가 자동으로 요약 및 분류**해주는 기능을 제공합니다. **STT(Speech-to-Text) 기술**을 통해 빠른 음성 메모 작성이 가능하며, 모든 데이터는 **웹 애플리케이션의 데이터베이스에 저장**됩니다.
+
+### 🧩 Problem Statement
+
+기존 메모 서비스는 사용자의 메모를 단순 저장하는 데 그치는 경우가 많아, 시간이 지날수록 중요한 정보를 찾기 어렵고 효율적인 활용이 어려워집니다. 특히 회의록, 아이디어, 공부 내용 등 다양한 형태의 메모를 빠르게 작성하고 구조화하는 것이 점점 더 중요해지고 있습니다.
+
+### 🎯 Value Proposition
+
+* **AI 요약**: 긴 메모를 간결한 핵심 요약으로 제공
+* **카테고리 분류**: 자동 분류 기능을 통한 체계적인 메모 정리
+* **STT 기반 음성 입력**: 빠른 음성 기반 메모 작성 가능
+* **웹 접근성**: 설치 없이 브라우저에서 사용 가능
+
+---
+
+## 2. Core Features
+
+### 2.1 텍스트 메모 작성
+- **What it does**: 사용자가 직접 웹에서 텍스트를 입력하여 메모를 작성
+- **Why it's important**: 기본적인 메모 작성 기능으로 모든 사용자가 활용 가능
+- **How it works**: React 기반 텍스트 에디터를 통해 실시간 메모 작성 및 저장
+
+### 2.2 음성 입력 (STT 변환)
+- **What it does**: 마이크 입력을 실시간 텍스트로 변환하여 음성 메모 작성
+- **Why it's important**: 빠른 메모 작성과 접근성을 제공
+- **How it works**: Web Speech API 또는 외부 STT 서비스를 활용한 실시간 음성-텍스트 변환
+
+### 2.3 AI 요약
+- **What it does**: 긴 메모 내용을 간결하고 핵심적인 요약으로 제공
+- **Why it's important**: 긴 메모의 핵심 내용을 빠르게 파악 가능
+- **How it works**: OpenAI API 또는 유사한 AI 서비스를 활용한 텍스트 요약
+
+### 2.4 자동 카테고리 분류
+- **What it does**: 메모 내용을 주제 기반으로 자동 분류
+- **Why it's important**: 체계적인 메모 정리와 검색 효율성 향상
+- **How it works**: AI 모델을 활용한 텍스트 분류 및 태그 자동 생성
+
+### 2.5 검색 기능
+- **What it does**: 키워드, 작성일, 카테고리별 메모 검색
+- **Why it's important**: 저장된 메모를 효율적으로 찾고 활용
+- **How it works**: 데이터베이스 인덱싱과 검색 알고리즘을 통한 빠른 검색
+
+### 2.6 데이터베이스 저장
+- **What it does**: 모든 메모를 서버의 데이터베이스에 안전하게 저장
+- **Why it's important**: 데이터 영속성과 백업 보장
+- **How it works**: PostgreSQL 또는 MongoDB를 활용한 구조화된 데이터 저장
+
+---
+
+## 3. User Experience
+
+### 3.1 User Personas
+
+#### 👩‍💼 직장인 / 프리랜서
+- **Needs**: 회의나 작업 중 웹에서 빠르게 메모하고, 자동 정리되길 원함
+- **Pain Points**: 긴 회의 내용을 정리하는 시간 부족
+- **Goals**: 효율적인 회의록 작성과 관리
+
+#### 🎓 대학생
+- **Needs**: 노트북을 통해 수업 내용을 음성/텍스트로 기록하고 정리
+- **Pain Points**: 수업 내용을 놓치거나 정리하는 시간 부족
+- **Goals**: 체계적인 학습 노트 관리
+
+#### 👨‍👩‍👧‍👦 일반 사용자
+- **Needs**: 웹에서 손쉽게 일상 메모를 작성하고 필요할 때 검색
+- **Pain Points**: 메모를 찾기 어렵고 정리가 안 됨
+- **Goals**: 간편하고 효율적인 메모 관리
+
+### 3.2 Key User Flows
+
+#### 시나리오: 웹에서 회의 내용을 음성으로 메모
+1. 사용자가 웹 앱을 실행해 로그인
+2. '새 메모' 버튼 클릭 → 음성 녹음 시작
+3. STT 기술로 실시간 텍스트 변환
+4. 메모 저장 시, 자동으로 AI 요약 및 카테고리 분류
+5. 전체 메모와 요약본이 웹 화면에 동시 표시됨
+6. 데이터는 자체 데이터베이스에 저장되어 웹에서 언제든지 확인 가능
+
+### 3.3 UI/UX Considerations
+- **Responsive Design**: 모바일과 데스크톱 모두에서 최적화된 경험
+- **Intuitive Interface**: 직관적인 음성 녹음 버튼과 텍스트 에디터
+- **Real-time Feedback**: 음성 입력 시 실시간 텍스트 변환 표시
+- **Visual Hierarchy**: 메모 목록, 요약, 카테고리별 명확한 구분
+
+---
+
+## 4. Technical Architecture
+
+### 4.1 System Components
+
+#### Frontend (Next.js)
+- **Framework**: Next.js 14 with TypeScript
+- **UI Library**: React with Tailwind CSS
+- **State Management**: React Context or Zustand
+- **Audio Processing**: Web Speech API or MediaRecorder API
+
+#### Backend (API Routes)
+- **Runtime**: Next.js API Routes
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: NextAuth.js or Clerk
+- **File Storage**: Vercel Blob or AWS S3
+
+#### AI Services
+- **STT**: OpenAI Whisper API or Google Speech-to-Text
+- **Text Summarization**: OpenAI GPT-4 or Claude API
+- **Text Classification**: OpenAI API or Hugging Face models
+
+### 4.2 Data Models
+
+#### User Model
+```typescript
+interface User {
+  id: string;
+  email: string;
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+#### Memo Model
+```typescript
+interface Memo {
+  id: string;
+  userId: string;
+  title: string;
+  content: string;
+  summary: string;
+  category: string;
+  tags: string[];
+  audioUrl?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+### 4.3 APIs and Integrations
+- **STT API**: OpenAI Whisper or Google Speech-to-Text
+- **AI Summary API**: OpenAI GPT-4 or Claude
+- **Database**: PostgreSQL with Prisma
+- **Authentication**: NextAuth.js or Clerk
+- **File Storage**: Vercel Blob for audio files
+
+### 4.4 Infrastructure Requirements
+- **Hosting**: Vercel (Frontend + API Routes)
+- **Database**: Supabase PostgreSQL or PlanetScale
+- **CDN**: Vercel Edge Network
+- **Monitoring**: Vercel Analytics
+
+---
+
+## 5. Development Roadmap
+
+### 5.1 MVP Requirements (Phase 1)
+
+#### Foundation Setup
+- Next.js 프로젝트 초기화 및 기본 구조 설정
+- 데이터베이스 스키마 설계 및 Prisma 설정
+- 기본 인증 시스템 구현
+- 기본 UI 컴포넌트 라이브러리 구축
+
+#### Core Features
+- 텍스트 메모 작성 및 저장 기능
+- 기본 메모 목록 및 상세 보기
+- 간단한 검색 기능 (제목, 내용 기반)
+- 반응형 웹 디자인
+
+#### Data Management
+- PostgreSQL 데이터베이스 연결
+- 메모 CRUD API 구현
+- 기본 사용자 인증
+
+### 5.2 Phase 2: AI Integration
+
+#### STT Implementation
+- Web Speech API 또는 외부 STT 서비스 연동
+- 음성 녹음 UI 컴포넌트 개발
+- 실시간 음성-텍스트 변환 기능
+
+#### AI Summary
+- OpenAI API 연동
+- 메모 저장 시 자동 요약 기능
+- 요약 결과 표시 UI
+
+#### Category Classification
+- AI 기반 자동 카테고리 분류
+- 카테고리별 메모 필터링
+- 태그 시스템 구현
+
+### 5.3 Phase 3: Advanced Features
+
+#### Enhanced Search
+- 고급 검색 기능 (날짜, 카테고리, 태그)
+- 검색 결과 하이라이팅
+- 검색 히스토리 관리
+
+#### User Experience
+- 드래그 앤 드롭 파일 업로드
+- 메모 템플릿 기능
+- 키보드 단축키 지원
+
+#### Analytics & Insights
+- 사용자 통계 대시보드
+- 메모 작성 패턴 분석
+- 카테고리별 사용 통계
+
+---
+
+## 6. Logical Dependency Chain
+
+### 6.1 Foundation First (Phase 1)
+1. **Next.js Setup**: 프로젝트 초기화 및 기본 구조
+2. **Database Schema**: 사용자 및 메모 테이블 설계
+3. **Authentication**: 기본 로그인/회원가입 시스템
+4. **Basic UI**: 메모 작성, 목록, 상세 보기 컴포넌트
+5. **CRUD APIs**: 메모 생성, 읽기, 수정, 삭제 API
+
+### 6.2 Core Functionality (Phase 2)
+6. **STT Integration**: 음성 입력 기능 구현
+7. **AI Summary**: OpenAI API 연동 및 요약 기능
+8. **Category System**: 자동 분류 및 카테고리 관리
+9. **Enhanced UI**: 요약 표시 및 카테고리 필터링
+
+### 6.3 Advanced Features (Phase 3)
+10. **Advanced Search**: 다중 조건 검색 및 필터링
+11. **User Analytics**: 사용 통계 및 인사이트
+12. **Performance Optimization**: 캐싱 및 성능 최적화
+
+### 6.4 MVP Focus Strategy
+- **Quick Win**: 텍스트 메모 작성부터 시작하여 즉시 사용 가능한 제품 제공
+- **Progressive Enhancement**: 기본 기능 완성 후 AI 기능 단계적 추가
+- **User Feedback Loop**: 각 단계별 사용자 피드백 수집 및 반영
+
+---
+
+## 7. Risks and Mitigations
+
+### 7.1 Technical Challenges
+
+#### STT Accuracy
+- **Risk**: 음성 인식 정확도가 낮을 수 있음
+- **Mitigation**: 
+  - 여러 STT 서비스 비교 테스트
+  - 사용자 피드백을 통한 정확도 개선
+  - 수동 편집 기능 제공
+
+#### AI API Costs
+- **Risk**: OpenAI API 사용량 증가로 인한 비용 증가
+- **Mitigation**:
+  - 사용량 기반 요금제 도입
+  - 캐싱을 통한 API 호출 최적화
+  - 대안 AI 서비스 검토
+
+#### Real-time Performance
+- **Risk**: 실시간 음성 변환 시 지연 발생
+- **Mitigation**:
+  - WebSocket을 통한 실시간 통신
+  - 로컬 STT 처리 검토
+  - 사용자 경험 최적화
+
+### 7.2 MVP Scope Management
+
+#### Feature Creep Prevention
+- **Risk**: 개발 범위가 계속 확장될 수 있음
+- **Mitigation**:
+  - 명확한 MVP 기준 설정
+  - 우선순위 기반 개발 계획
+  - 정기적인 범위 검토
+
+#### User Adoption
+- **Risk**: 사용자 채택률이 낮을 수 있음
+- **Mitigation**:
+  - 사용자 테스트 및 피드백 수집
+  - 온보딩 프로세스 최적화
+  - 지속적인 UX 개선
+
+### 7.3 Resource Constraints
+
+#### Development Timeline
+- **Risk**: 개발 일정 지연 가능성
+- **Mitigation**:
+  - 단계별 마일스톤 설정
+  - 핵심 기능 우선 개발
+  - 유연한 일정 조정
+
+#### Technical Debt
+- **Risk**: 빠른 개발로 인한 기술 부채 누적
+- **Mitigation**:
+  - 코드 리뷰 및 테스트 자동화
+  - 정기적인 리팩토링
+  - 문서화 및 주석 관리
+
+---
+
+## 8. Appendix
+
+### 8.1 Research Findings
+
+#### Market Analysis
+- 메모 앱 시장은 지속적으로 성장 중
+- AI 기반 메모 앱의 사용자 만족도 높음
+- 음성 입력 기능에 대한 수요 증가
+
+#### Technical Research
+- Web Speech API의 브라우저 호환성 검토 완료
+- OpenAI API의 요약 기능 성능 테스트 완료
+- Next.js 14의 App Router 성능 검증 완료
+
+### 8.2 Technical Specifications
+
+#### Performance Requirements
+- 페이지 로딩 시간: 3초 이내
+- 음성 변환 지연: 1초 이내
+- 검색 응답 시간: 500ms 이내
+
+#### Security Requirements
+- 사용자 데이터 암호화 저장
+- HTTPS 필수 적용
+- API 키 보안 관리
+
+#### Scalability Considerations
+- 데이터베이스 인덱싱 최적화
+- CDN을 통한 정적 파일 서빙
+- API 응답 캐싱 전략
+
+---
+
+## ✅ 결론 및 향후 과제
+
+Memora는 브라우저 기반에서 음성과 텍스트로 빠르게 메모하고, AI가 자동으로 요약 및 분류해주는 웹 메모장입니다. 
+
+**초기 버전에서는 핵심 기능인 STT 기반 음성 메모, AI 요약, 카테고리 분류에 집중**하고, 사용자 피드백을 바탕으로 검색 고도화 및 시각화 통계 기능을 순차적으로 확장할 예정입니다.
+
+**성공 지표**:
+- 월간 활성 사용자 (MAU) 증가
+- 메모 작성 빈도 및 사용 시간
+- AI 요약 기능 사용률
+- 사용자 만족도 및 리텐션
